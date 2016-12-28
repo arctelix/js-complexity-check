@@ -1,0 +1,17 @@
+{
+  "name": "angular-seed",
+  "description": "A starter project for AngularJS",
+  "version": "0.0.0",
+  "homepage": "https://github.com/angular/angular-seed",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.9",
+    "angular-route": "~1.5.9",
+    "angular-loader": "~1.5.9",
+    "angular-mocks": "~1.5.9",
+    "html5-boilerplate": "^5.3.0",
+    "esprima": "https://unpkg.com/esprima@~3.1/dist/esprima.js",
+    "eventlistener-polyfill": "^1.0.0"
+  }
+}

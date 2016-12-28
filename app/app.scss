@@ -1,0 +1,303 @@
+// Colors
+
+$bgcolor: rgb(55, 55, 65);
+$txt:rgb(25, 25, 27);
+$txt-light:(171, 171, 193);
+
+$blue: rgb(65, 110, 152);
+$blue-d: rgb(27, 46, 86);
+$teal: rgb(65, 137, 152);
+$yellow: rgb(139, 132, 63);
+$yellow-d: rgb(56, 55, 22);
+$orange: rgb(152, 103, 46);
+$red: rgb(152,65,65);
+$red-d: rgb(80, 24, 25);
+$green: rgb(101, 152, 65);
+$green-d: rgb(72, 126, 34);
+$purple: rgb(125, 65, 152);
+$gray: gray;
+
+$token-d: $green-d;
+
+$inset-shadow-dark: rgb(13, 13, 13);
+$inset-shadow: rgb(88, 88, 105);
+$inset-box-shadow: inset 1px 1px 10px rgba(0,0,0,.8);
+
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700|Roboto+Mono');
+
+// Mixins
+
+@mixin embossed-text{
+  color: $txt;
+  text-shadow: 0px 1px 2px $inset-shadow;
+}
+
+@mixin embossed-text-dark{
+  color: $bgcolor;
+  text-shadow: 0px 1px 2px $inset-shadow-dark;
+}
+
+@mixin prefix($prop, $value...) {
+  -webkit-#{$prop}: $value;
+  -moz-#{$prop}:    $value;
+  -ie-#{$prop}:     $value;
+  -o-#{$prop}:      $value;
+  #{$prop}:         $value;
+}
+
+@mixin transition($transition...) {
+    -webkit-transition: $transition;
+    -moz-transition:    $transition;
+    -ie-transition:     $transition;
+    -o-transition:      $transition;
+    transition:         $transition;
+}
+
+@mixin transform($transform...) {
+    -webkit-transform: $transform;
+    -moz-transform:    $transform;
+    -ie-transform:     $transform;
+    -o-transform:      $transform;
+    transform:         $transform;
+}
+
+@mixin inset-border{
+  border:$txt solid 2px;
+  box-shadow: inset 0px 1px 2px $inset-shadow,
+              0px 1px 2px $inset-shadow;
+}
+
+@mixin floating-text{
+  color: $bgcolor;
+  text-shadow: 0px 1px 2px $inset-shadow;
+}
+
+@mixin recessed-box($opacity:.8){
+  background:rgba(0, 0, 0, $opacity);
+  box-shadow: $inset-box-shadow;
+}
+
+@mixin bg-before($bg-color:white, $opacity:.5){
+  position: relative;
+  z-index: 0;
+  &:before{
+    content:'';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    @include prefix(opacity, $opacity);
+    background: $bg-color;
+    pointer-events: none;
+    z-index: -1;
+    @content ;
+  }
+}
+
+@mixin link-style($sel, $color,$h-color){
+  #{$sel}{
+    color:$color;
+    @content;
+  }
+  #{$sel}:hover{
+    color:$h-color;
+  }
+}
+
+body,
+html{
+  font-family: 'Raleway', sans-serif;
+  background-color:$bgcolor;
+  color:$txt;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  @include embossed-text;
+}
+
+nav{
+  text-align: center;
+  @include bg-before(black, .6);
+  @include embossed-text-dark;
+  margin-bottom: 20px;
+}
+  nav > *{
+    margin:0;
+    padding:5px;
+  }
+  nav span{
+    font-size:small;
+  }
+  nav .brand{
+    font-family: 'Raleway', sans-serif;
+    color: $bgcolor;
+    font-size: xx-large;
+    font-weight: normal;
+  }
+  nav .brand .sub-text{
+    color: $gray;
+    font-weight: normal;
+  }
+  nav .sections div{
+    color: $blue;
+    display: inline-block;
+    margin:0 10px;
+  }
+
+footer{
+  @include bg-before(black, .6);
+  @include embossed-text-dark;
+  text-align: center;
+  padding: 20px;
+  color: $bgcolor;
+}
+
+button{
+  @include inset-border;
+  border-color: $gray;
+  color:$gray;
+  line-height: 30px;
+  font-size: 20px;
+  min-width: 80px;
+  background:none;
+  border-radius:3px;
+  @include transition(border .5s ease-in-out)
+}
+  button:hover{
+    border-color: #2e2e2e;
+  }
+  button:focus{
+    outline:none;
+  }
+
+button.blue{
+  color:$blue;
+  border-color:$blue;
+}
+  button.blue:hover{
+    border-color:$blue-d;
+  }
+
+button.red{
+  color:$red;
+  border-color:$red;
+}
+  button.red:hover{
+    border-color:$red-d;
+  }
+
+button.yellow{
+  color:$yellow;
+  border-color:$yellow;
+}
+  button.yellow:hover{
+    border-color:$yellow-d;
+  }
+
+content{
+  display: block;
+  min-height:100%;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+}
+
+.sub-text{
+  font-size:.5em;
+}
+
+.input-sync {
+  box-sizing: border-box;
+  position: relative;
+}
+
+.input-box{
+  font-family: 'Roboto Mono', monospace;
+  width: 100%;
+  height: 500px;
+  border-radius: 3px;
+  color:$gray;
+  box-sizing: border-box;
+  padding: 4px;
+  //@include inset-border;
+  //border: 3px solid $green;
+  border:none;
+  text-shadow: none;
+  transform:translate3d(0,0,0);
+}
+  textarea.input-box {
+    background: $bgcolor;
+    @include recessed-box(.5);
+  }
+  tokenized.input-box {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow:hidden;
+  }
+  tokenized div{
+    white-space: pre-wrap;
+  }
+
+textarea:focus{
+  outline: none;
+}
+
+textarea::-webkit-input-placeholder {
+   color: $gray;
+}
+
+textarea:-moz-placeholder {
+   color: $gray;
+}
+
+textarea::-moz-placeholder {
+   color: $gray;
+}
+
+textarea:-ms-input-placeholder {
+   color: $gray;
+}
+
+results{
+  display:block;
+  min-height:80px;
+  text-align: center;
+}
+  results .main > div{
+    font-size:1.8em;
+    color:$green;
+  }
+
+result{
+  display:inline-block;
+  margin:5px;
+}
+  result * {
+    margin:0;
+    padding:0;
+  }
+
+token{
+  color:$token-d;
+}
+token span{
+  position:relative;
+  top:-10px;
+  left:-5px;
+  font-size:.5em;
+  display:none;
+}
+form .actions button{
+  margin-right:5px;
+  margin-top:5px;
+}
+form .actions .label{
+  color:gray;
+  margin-left: 20px;
+  float:right;
+}
+

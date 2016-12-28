@@ -1,0 +1,26 @@
+<div ng-controller="mainViewCtrl as main">
+  <results>
+    <div class="main" ng-show="main.results">
+      <div id="total" >Cyclomatic Complexity: <span>{{main.results.complexity}}</span></div>
+      <result ng-repeat="(type, tokens) in main.results.tokens">
+        <h4>{{type}} <span>{{tokens.length}}</span></h4>
+      </result>
+    </div>
+  </results>
+  <form id="check-form" novalidate class="cool-form">
+    <div class="input-sync body" sync-scroll>
+      <textarea class="input-box" ng-model="main.evalCode" ng-change="main.checkJSCode()"
+                placeholder="Type or paste your code here"></textarea>
+      <tokenized class="input-box">
+        <div ng-bind-html="main.results.text"></div>
+      </tokenized>
+    </div>
+    <div class="actions">
+      <button class="blue" type="submit" ng-click="main.demo()" value="demo">Demo</button>
+      <button class="red" type="reset" ng-click="main.reset()" value="reset">Reset</button>
+      <button class="yellow" type="button" ng-click="main.toggleEngine()" value="mode">Engine</button>
+      <div class="label">using {{main.engine}} engine</div>
+    </div>
+  </form>
+
+</div>
